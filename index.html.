@@ -5,136 +5,179 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#101812">
-  <meta name="description" content="Prono Vision : analyses et probabilités football.">
+  <meta name="description" content="Prono Vision : analyses et probabilités de football.">
   <title>Prono Vision | Football</title>
   <style>
     * { box-sizing: border-box; }
     body {
       margin: 0;
       background: #101812;
-      color: #f3f7f3;
+      color: #f4f7f4;
       font-family: Arial, sans-serif;
     }
     header {
-      padding: 25px 18px;
+      padding: 22px 18px;
       border-bottom: 1px solid #29382d;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      gap: 12px;
     }
-    .logo { font-size: 23px; font-weight: 800; }
-    .logo span { color: #53e38a; }
+    .logo { font-size: 21px; font-weight: 900; }
+    .logo span { color: #6ee787; }
     .tag {
-      color: #53e38a;
-      font-size: 11px;
-      border: 1px solid #326844;
-      padding: 7px;
+      border: 1px solid #395341;
+      color: #a9efb7;
+      padding: 7px 10px;
       border-radius: 20px;
+      font-size: 11px;
     }
-    main { max-width: 850px; margin: auto; padding: 22px 15px; }
+    main { max-width: 850px; margin: auto; padding: 28px 16px; }
     .hero {
-      background: linear-gradient(135deg, #1c3926, #15241a);
-      padding: 25px 20px;
-      border-radius: 18px;
-      margin-bottom: 25px;
+      padding: 27px 20px;
+      border: 1px solid #304936;
+      border-radius: 22px;
+      background: linear-gradient(135deg, #1b3020, #131c16);
     }
-    .hero h1 { margin: 0 0 10px; font-size: 28px; }
-    .hero p { color: #c0d2c4; line-height: 1.5; }
-    .section-title { font-size: 20px; margin: 25px 0 15px; }
-    .filters { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
-    button {
-      background: #203328;
-      color: white;
-      border: 1px solid #385542;
-      border-radius: 9px;
+    .eyebrow {
+      color: #80e995;
+      font-size: 12px;
+      font-weight: bold;
+      letter-spacing: 2px;
+    }
+    h1 { font-size: clamp(30px, 7vw, 48px); margin: 14px 0; }
+    .hero p { color: #bdc9bf; line-height: 1.6; }
+    .notice {
+      margin-top: 17px;
+      padding: 12px;
+      background: #202a22;
+      color: #c7d4ca;
+      border-radius: 10px;
+      font-size: 12px;
+      line-height: 1.5;
+    }
+    .section-title {
+      margin: 30px 0 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+    }
+    h2 { font-size: 20px; margin: 0; }
+    .filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+    .filters button {
+      border: 1px solid #344638;
+      color: #dce8de;
+      background: #19231b;
       padding: 10px 13px;
+      border-radius: 22px;
       cursor: pointer;
     }
-    button.active { background: #53e38a; color: #102016; }
+    .filters button.active { background: #6ee787; color: #102016; font-weight: bold; }
     .match {
-      background: #19251d;
-      border: 1px solid #2d3c31;
-      border-radius: 14px;
-      padding: 16px;
-      margin-bottom: 12px;
+      background: #18221a;
+      border: 1px solid #2d3b30;
+      border-radius: 15px;
+      padding: 17px;
+      margin: 12px 0;
     }
-    .league { color: #9cb5a2; font-size: 12px; }
-    .teams { display: flex; justify-content: space-between; gap: 10px; margin: 15px 0; font-weight: bold; }
-    .probabilities { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; }
+    .league { color: #91d99f; font-size: 12px; margin-bottom: 14px; }
+    .teams { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+    .team { flex: 1; font-weight: bold; font-size: 14px; }
+    .team:last-child { text-align: right; }
+    .vs { color: #87958a; font-size: 12px; }
+    .probabilities { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 18px; }
     .prob {
+      background: #222e24;
+      border-radius: 9px;
       text-align: center;
-      background: #24372a;
-      border-radius: 8px;
-      padding: 10px 3px;
+      padding: 11px 4px;
     }
-    .prob small { display: block; color: #a9c0ae; margin-bottom: 5px; }
-    .prob strong { color: #66ed98; font-size: 19px; }
-    .notice { color: #a9b8ad; font-size: 12px; line-height: 1.6; }
-    footer { text-align: center; padding: 25px; color: #8fa194; font-size: 12px; }
+    .prob strong { display: block; font-size: 18px; color: #81e996; }
+    .prob span { font-size: 11px; color: #b6c3b9; }
+    .empty { color: #b6c3b9; font-size: 14px; line-height: 1.6; }
+    footer { text-align: center; padding: 25px 15px; color: #8f9d92; font-size: 12px; }
   </style>
 </head>
 <body>
   <header>
     <div class="logo">PRONO <span>VISION</span></div>
-    <div class="tag">⚽ FOOTBALL</div>
+    <div class="tag">FOOTBALL • ANALYSE</div>
   </header>
 
   <main>
     <section class="hero">
-      <h1>Le football, vu autrement.</h1>
-      <p>Des statistiques, des analyses et des probabilités pour mieux comprendre les matchs.</p>
+      <div class="eyebrow">LA DATA AU SERVICE DU FOOTBALL</div>
+      <h1>Le football,<br>vu autrement.</h1>
+      <p>Découvre les matchs, compare les probabilités et construis ton analyse avant le coup d’envoi.</p>
+      <div class="notice">
+        VERSION DE DÉMONSTRATION — Les matchs et probabilités ci-dessous sont fictifs. Ils ne constituent pas des prédictions réelles.
+      </div>
     </section>
 
-    <h2 class="section-title">📊 Pronostics du jour</h2>
-    <div class="filters">
-      <button class="active" onclick="filtrer('Tous',this)">Tous</button>
-      <button onclick="filtrer('Ligue 1',this)">Ligue 1</button>
-      <button onclick="filtrer('Premier League',this)">Premier League</button>
-      <button onclick="filtrer('La Liga',this)">La Liga</button>
+    <div class="section-title">
+      <h2>Matchs à analyser</h2>
+      <span class="tag">DÉMO</span>
     </div>
 
-    <div id="matchs"></div>
+    <div class="filters">
+      <button class="active" data-league="all">Tous</button>
+      <button data-league="Ligue 1">Ligue 1</button>
+      <button data-league="Premier League">Premier League</button>
+      <button data-league="La Liga">La Liga</button>
+    </div>
 
-    <p class="notice">
-      Les probabilités sont des estimations statistiques, pas des garanties.
-      Vérifie les informations avant toute décision.
-    </p>
+    <section id="matches">
+      <article class="match" data-league="Ligue 1">
+        <div class="league">LIGUE 1 • EXEMPLE</div>
+        <div class="teams"><div class="team">Paris FC</div><div class="vs">VS</div><div class="team">Lyon</div></div>
+        <div class="probabilities">
+          <div class="prob"><strong>45%</strong><span>Victoire Paris FC</span></div>
+          <div class="prob"><strong>27%</strong><span>Match nul</span></div>
+          <div class="prob"><strong>28%</strong><span>Victoire Lyon</span></div>
+        </div>
+      </article>
+
+      <article class="match" data-league="Premier League">
+        <div class="league">PREMIER LEAGUE • EXEMPLE</div>
+        <div class="teams"><div class="team">Arsenal</div><div class="vs">VS</div><div class="team">Chelsea</div></div>
+        <div class="probabilities">
+          <div class="prob"><strong>51%</strong><span>Victoire Arsenal</span></div>
+          <div class="prob"><strong>25%</strong><span>Match nul</span></div>
+          <div class="prob"><strong>24%</strong><span>Victoire Chelsea</span></div>
+        </div>
+      </article>
+
+      <article class="match" data-league="La Liga">
+        <div class="league">LA LIGA • EXEMPLE</div>
+        <div class="teams"><div class="team">Real Madrid</div><div class="vs">VS</div><div class="team">Séville</div></div>
+        <div class="probabilities">
+          <div class="prob"><strong>58%</strong><span>Victoire Real</span></div>
+          <div class="prob"><strong>24%</strong><span>Match nul</span></div>
+          <div class="prob"><strong>18%</strong><span>Victoire Séville</span></div>
+        </div>
+      </article>
+    </section>
+
+    <p class="empty">Prochaine étape : connecter une source de données football et un modèle de calcul vérifié pour afficher les vrais matchs et des probabilités estimées.</p>
   </main>
 
-  <footer>© 2026 Prono Vision · Analyses football</footer>
+  <footer>PRONO VISION © 2026 • Site de démonstration gratuit</footer>
 
   <script>
-    const exemples = [
-      {ligue:"Ligue 1", domicile:"Équipe à domicile", exterieur:"Équipe visiteuse", p1:45, pn:28, p2:27},
-      {ligue:"Premier League", domicile:"Équipe à domicile", exterieur:"Équipe visiteuse", p1:39, pn:30, p2:31},
-      {ligue:"La Liga", domicile:"Équipe à domicile", exterieur:"Équipe visiteuse", p1:51, pn:26, p2:23}
-    ];
-
-    function afficher(ligue="Tous") {
-      const liste = exemples.filter(m => ligue==="Tous" || m.ligue===ligue);
-      document.getElementById("matchs").innerHTML = liste.length
-        ? liste.map(m => `
-          <article class="match">
-            <div class="league">${m.ligue} · EXEMPLE DE PRÉSENTATION</div>
-            <div class="teams">
-              <span>${m.domicile}</span><span>VS</span><span>${m.exterieur}</span>
-            </div>
-            <div class="probabilities">
-              <div class="prob"><small>1 · Domicile</small><strong>${m.p1}%</strong></div>
-              <div class="prob"><small>N · Nul</small><strong>${m.pn}%</strong></div>
-              <div class="prob"><small>2 · Extérieur</small><strong>${m.p2}%</strong></div>
-            </div>
-          </article>`).join("")
-        : "<p>Aucun match dans cette catégorie.</p>";
-    }
-
-    function filtrer(ligue, bouton) {
-      document.querySelectorAll(".filters button").forEach(b => b.classList.remove("active"));
-      bouton.classList.add("active");
-      afficher(ligue);
-    }
-
-    afficher();
+    document.querySelectorAll(".filters button").forEach(function(button) {
+      button.addEventListener("click", function() {
+        document.querySelectorAll(".filters button").forEach(function(b) {
+          b.classList.remove("active");
+        });
+        button.classList.add("active");
+        var league = button.dataset.league;
+        document.querySelectorAll(".match").forEach(function(match) {
+          match.style.display =
+            league === "all" || match.dataset.league === league ? "block" : "none";
+        });
+      });
+    });
   </script>
 </body>
 </html>

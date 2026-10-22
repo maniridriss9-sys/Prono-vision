@@ -1,0 +1,140 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101812">
+  <meta name="description" content="Prono Vision : analyses et probabilités football.">
+  <title>Prono Vision | Football</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: #101812;
+      color: #f3f7f3;
+      font-family: Arial, sans-serif;
+    }
+    header {
+      padding: 25px 18px;
+      border-bottom: 1px solid #29382d;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .logo { font-size: 23px; font-weight: 800; }
+    .logo span { color: #53e38a; }
+    .tag {
+      color: #53e38a;
+      font-size: 11px;
+      border: 1px solid #326844;
+      padding: 7px;
+      border-radius: 20px;
+    }
+    main { max-width: 850px; margin: auto; padding: 22px 15px; }
+    .hero {
+      background: linear-gradient(135deg, #1c3926, #15241a);
+      padding: 25px 20px;
+      border-radius: 18px;
+      margin-bottom: 25px;
+    }
+    .hero h1 { margin: 0 0 10px; font-size: 28px; }
+    .hero p { color: #c0d2c4; line-height: 1.5; }
+    .section-title { font-size: 20px; margin: 25px 0 15px; }
+    .filters { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
+    button {
+      background: #203328;
+      color: white;
+      border: 1px solid #385542;
+      border-radius: 9px;
+      padding: 10px 13px;
+      cursor: pointer;
+    }
+    button.active { background: #53e38a; color: #102016; }
+    .match {
+      background: #19251d;
+      border: 1px solid #2d3c31;
+      border-radius: 14px;
+      padding: 16px;
+      margin-bottom: 12px;
+    }
+    .league { color: #9cb5a2; font-size: 12px; }
+    .teams { display: flex; justify-content: space-between; gap: 10px; margin: 15px 0; font-weight: bold; }
+    .probabilities { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; }
+    .prob {
+      text-align: center;
+      background: #24372a;
+      border-radius: 8px;
+      padding: 10px 3px;
+    }
+    .prob small { display: block; color: #a9c0ae; margin-bottom: 5px; }
+    .prob strong { color: #66ed98; font-size: 19px; }
+    .notice { color: #a9b8ad; font-size: 12px; line-height: 1.6; }
+    footer { text-align: center; padding: 25px; color: #8fa194; font-size: 12px; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">PRONO <span>VISION</span></div>
+    <div class="tag">⚽ FOOTBALL</div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <h1>Le football, vu autrement.</h1>
+      <p>Des statistiques, des analyses et des probabilités pour mieux comprendre les matchs.</p>
+    </section>
+
+    <h2 class="section-title">📊 Pronostics du jour</h2>
+    <div class="filters">
+      <button class="active" onclick="filtrer('Tous',this)">Tous</button>
+      <button onclick="filtrer('Ligue 1',this)">Ligue 1</button>
+      <button onclick="filtrer('Premier League',this)">Premier League</button>
+      <button onclick="filtrer('La Liga',this)">La Liga</button>
+    </div>
+
+    <div id="matchs"></div>
+
+    <p class="notice">
+      Les probabilités sont des estimations statistiques, pas des garanties.
+      Vérifie les informations avant toute décision.
+    </p>
+  </main>
+
+  <footer>© 2026 Prono Vision · Analyses football</footer>
+
+  <script>
+    const exemples = [
+      {ligue:"Ligue 1", domicile:"Équipe à domicile", exterieur:"Équipe visiteuse", p1:45, pn:28, p2:27},
+      {ligue:"Premier League", domicile:"Équipe à domicile", exterieur:"Équipe visiteuse", p1:39, pn:30, p2:31},
+      {ligue:"La Liga", domicile:"Équipe à domicile", exterieur:"Équipe visiteuse", p1:51, pn:26, p2:23}
+    ];
+
+    function afficher(ligue="Tous") {
+      const liste = exemples.filter(m => ligue==="Tous" || m.ligue===ligue);
+      document.getElementById("matchs").innerHTML = liste.length
+        ? liste.map(m => `
+          <article class="match">
+            <div class="league">${m.ligue} · EXEMPLE DE PRÉSENTATION</div>
+            <div class="teams">
+              <span>${m.domicile}</span><span>VS</span><span>${m.exterieur}</span>
+            </div>
+            <div class="probabilities">
+              <div class="prob"><small>1 · Domicile</small><strong>${m.p1}%</strong></div>
+              <div class="prob"><small>N · Nul</small><strong>${m.pn}%</strong></div>
+              <div class="prob"><small>2 · Extérieur</small><strong>${m.p2}%</strong></div>
+            </div>
+          </article>`).join("")
+        : "<p>Aucun match dans cette catégorie.</p>";
+    }
+
+    function filtrer(ligue, bouton) {
+      document.querySelectorAll(".filters button").forEach(b => b.classList.remove("active"));
+      bouton.classList.add("active");
+      afficher(ligue);
+    }
+
+    afficher();
+  </script>
+</body>
+</html>
